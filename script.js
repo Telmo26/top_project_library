@@ -15,30 +15,17 @@ function Book(title, author, pages, read) {
     }
 }
 
+Book.prototype.toggleRead = function() {
+    this.read = !this.read;
+}
+
 const myLibrary = [];
 
 function addBookToLibrary(title, author, pages, read) {
     const id = crypto.randomUUID();
     const book = new Book(title, author, pages, read);
 
-    myLibrary.push([id, book]);
-}
-
-function toggleReadStatus(id) {
-    for (let i = 0 ; i < myLibrary.length ; i++) {
-        if (myLibrary[i][0] === id) {
-            let book = myLibrary[i][1];
-            book.read = !book.read;
-        }
-    }
-}
-
-function deleteBook(id) {
-    for (let i = 0 ; i < myLibrary.length ; i++) {
-        if (myLibrary[i][0] === id) {
-            myLibrary.splice(i, 1);
-        }
-    }
+    myLibrary[id] = book;
 }
 
 function displayBooks() {
@@ -48,16 +35,17 @@ function displayBooks() {
         table_body.removeChild(table_body.firstChild);
     }
 
-    for (const [id, book] of myLibrary) {
+    for (const id in myLibrary) {
+        const book = myLibrary[id];
+
         const tr = document.createElement("tr");
-        tr.dataset.id = id;
 
         const delete_td = document.createElement("td"); 
         {
             const delete_btn = document.createElement("button");
-            delete_btn.innerText = "✖️";
+            delete_btn.textContent = "✖️";
             delete_btn.addEventListener("click", () => {
-                deleteBook(delete_btn.parentElement.parentElement.dataset.id);
+                delete myLibrary[id];
                 displayBooks();
             })
             delete_td.appendChild(delete_btn);
@@ -68,7 +56,7 @@ function displayBooks() {
             const value = book[key];
 
             const td = document.createElement("td");
-            td.innerHTML = value;
+            td.textContent = value;
             tr.appendChild(td);
         }
 
@@ -77,7 +65,7 @@ function displayBooks() {
             const button = document.createElement("button");
             button.textContent = "Toggle Read";
             button.addEventListener("click", () => {
-                toggleReadStatus(button.parentElement.parentElement.dataset.id);
+                book.toggleRead();
                 displayBooks();
             })
             toggle_td.appendChild(button);

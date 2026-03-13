@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --table-header: gray;
+    --table-stripe: lightgray;
+}
+
+.container {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: lightblue;
+    padding: 30px;
+    border-radius: 30px;
+
+    display: grid;
+    grid-auto-rows: min-content;
+    place-items: center;
+    gap: 20px;
+}
+
+button {
+    border: none;
+}
+
+.container > button {
+    width: max-content;
+    height: auto;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: rgb(32, 178, 170);
+}
+
+.container > button:active {
+    background-color: rgb(22, 116, 111);
+}
+
+table {
+    border: 1px solid black;
+    border-spacing: 0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: var(--table-header);
+    color: white;
+    
+    th {
+        padding: 8px;
+    }
+}
+
+tbody > tr:nth-child(2n) {
+    background-color: var(--table-stripe);
+}
+
+tbody > tr:nth-child(2n+1) {
+    background-color: whitesmoke;
+
+    button {
+        background-color: var(--table-stripe);
+    }
+}
+
+tr > * {
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr > td {
+    padding: 8px;
+
+    button {
+        padding: 8px;
+        border-radius: 6px;
+        width: max-content;
+    }
+
+    button:active {
+        background-color: var(--table-header);
+    }
+}

@@ -52,14 +52,17 @@ function displayBooks() {
         const tr = document.createElement("tr");
         tr.dataset.id = id;
 
-        const delete_btn = document.createElement("button");
-        delete_btn.innerText = "✖️";
-        delete_btn.addEventListener("click", () => {
-            deleteBook(delete_btn.parentElement.dataset.id);
-            displayBooks();
-        })
-
-        tr.appendChild(delete_btn);
+        const delete_td = document.createElement("td"); 
+        {
+            const delete_btn = document.createElement("button");
+            delete_btn.innerText = "✖️";
+            delete_btn.addEventListener("click", () => {
+                deleteBook(delete_btn.parentElement.parentElement.dataset.id);
+                displayBooks();
+            })
+            delete_td.appendChild(delete_btn);
+        }
+        tr.appendChild(delete_td);
 
         for (const key of ["title", "author", "pages", "read"]) {
             const value = book[key];
@@ -69,13 +72,17 @@ function displayBooks() {
             tr.appendChild(td);
         }
 
-        const button = document.createElement("button");
-        button.textContent = "Toggle Read";
-        button.addEventListener("click", () => {
-            toggleReadStatus(button.parentElement.dataset.id);
-            displayBooks();
-        })
-        tr.appendChild(button);
+        const toggle_td = document.createElement("td"); 
+        {
+            const button = document.createElement("button");
+            button.textContent = "Toggle Read";
+            button.addEventListener("click", () => {
+                toggleReadStatus(button.parentElement.parentElement.dataset.id);
+                displayBooks();
+            })
+            toggle_td.appendChild(button);
+        }
+        tr.appendChild(toggle_td);
 
         table_body.appendChild(tr);
     }

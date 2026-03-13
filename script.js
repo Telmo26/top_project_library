@@ -88,10 +88,22 @@ function displayBooks() {
     }
 }
 
-const new_button = document.querySelector(".new-book");
+const dialog = document.querySelector("#book-adder");
 
+const new_button = document.querySelector(".new-book");
 new_button.addEventListener("click", (e) => {
-    e.preventDefault();
-    addBookToLibrary("test", "test", 0, true);
+    dialog.showModal();
     displayBooks();
 });
+
+const submit = document.querySelector("form");
+submit.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(submit);
+
+    const read = formData.get("read") ? true : false;
+
+    addBookToLibrary(formData.get("title"), formData.get("author"), formData.get("pages"), read);
+    displayBooks();
+    dialog.close();
+})

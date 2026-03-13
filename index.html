@@ -25,6 +25,26 @@
         <button class="new-book">
             Add a new book to the library
         </button>
+
+        <dialog id="book-adder">
+            <form action="">
+                <h2>Adding a new book to the library</h2>
+
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" required>
+
+                <label for="pages">Pages:</label>
+                <input type="number" id="pages" name="pages" min="0" required>
+
+                <label for="read">Read</label>
+                <input type="checkbox" id="read" name="read">
+
+                <button>Submit</button>
+            </form>
+        </dialog>
     </div>
 </body>
 </html>

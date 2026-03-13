@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: inherit;
 }
 
 :root {
@@ -85,4 +86,30 @@ tr > td {
     button:active {
         background-color: var(--table-header);
     }
+}
+
+dialog[open] {
+    padding: 30px;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+dialog > form {
+    display: grid;
+    grid-template-columns: min-content 2fr;
+    gap: 15px;
+}
+
+form h2,
+form button {
+    grid-column: span 2;
+}
+
+form button {
+    width: max-content;
+    padding: 8px;
+    border-radius: 8px;
+
+    justify-self: center;
 }
